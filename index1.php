@@ -2,7 +2,7 @@
 
 function draw_calendar($day,$month,$year) {
 	
-	if (!$link =  mysqli_connect("xxx", "xxx", "xxx","xxxx")) {
+	if (!$link =  mysqli_connect("212.25.183.222", "usr_gest_pres", "Ul3yg9?5","admin_gest_presenze")) {
 		echo 'Could not connect to mysql';
 		exit;
 	}
@@ -82,29 +82,37 @@ function draw_calendar($day,$month,$year) {
 						$datetime0 = new DateTime($orari[0]);
 						$datetime1 = new DateTime($orari[1]);
 						$interval1 = $datetime0->diff($datetime1);
-						$ore1 = $interval1->format('%h');
-						$minuti1 = $interval1->format('%i');
+						$tempo1 = $interval1->format('%h:%i');
+						//$ore1 = $interval1->format('%h');
+						//$minuti1 = $interval1->format('%i');
 						
 						$datetime0 = new DateTime($orari[3]);
 						$datetime1 = new DateTime($orari[2]);
 						$interval1 = $datetime1->diff($datetime0);
-						$ore2 = $interval1->format('%h');
-						$minuti2 = $minuti + $interval1->format('%i');
+						$tempo2 = $interval1->format('%h:%i');
+						//$ore2 = $interval1->format('%h');
+						//$minuti2 = $minuti + $interval1->format('%i');
+						
+						$Temp = $tempo1->add($tempo2);
 						
 						$datetime0 = new DateTime($orari[5]);
 						$datetime1 = new DateTime($orari[4]);
 						$interval1 = $datetime1->diff($datetime0);
-						$ore3 = $interval1->format('%h');
-						$minuti3 = $minuti + $interval1->format('%i');
-
-						$ore = $ore1 + $ore2 + $ore3;
-						$minuti = $minuti1 + $minuti2 + $minuti3; 
+						$tempo3 = $interval1->format('%h:%i');
+						//$ore3 = $interval1->format('%h');
+						//$minuti3 = $minuti + $interval1->format('%i');
+						
+						$TempTot = $Temp->add($tempo3);
+						
+						//$tempo = $tempo1 + $tempo2 + $tempo3;
+						//$ore = $ore1 + $ore2 + $ore3;
+						//$minuti = $minuti1 + $minuti2 + $minuti3; 
 						
 						
 						if (mysqli_num_rows($result1) & 1) { 
 							$calendar.= '<td class="calendar-day-np"> timbrature discordanti</td>';
 						} else  { 
-							$calendar.= '<td class="calendar-day-np">'.$ore.':'.$minuti.'</td>';
+							$calendar.= '<td class="calendar-day-np">'.$TempTot.'</td>';
 							//$calendar.= '<td class="calendar-day-np">'.$tempo.'</td>';
 						}
 					}
