@@ -2,7 +2,7 @@
 
 function draw_calendar($day,$month,$year) {
 	
-	if (!$link =  mysqli_connect("212.25.183.222", "usr_gest_pres", "Ul3yg9?5","admin_gest_presenze")) {
+	if (!$link =  mysqli_connect("xxxxx")) {
 		echo 'Could not connect to mysql';
 		exit;
 	}
